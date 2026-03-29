@@ -1,0 +1,5 @@
+            "TITLE": "VoiceFIR AI",
+            "SUBTITLE": "Police Mitra Assistant",
+            "OFFICIAL_FIR_SECTION": "Official FI        "VALUE_TRANSLATIONS": {
+            "Under Investigation": "Under Investigation",
+            "Completed": "Completed",
