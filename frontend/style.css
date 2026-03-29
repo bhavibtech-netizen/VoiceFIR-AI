@@ -1,0 +1,829 @@
+/* =============================================
+   VoiceFIR AI – Premium Dark UI Stylesheet
+   ============================================= */
+
+:root {
+    --primary:       #2196f3;
+    --primary-light: #bbdefb;
+    --primary-glow:  rgba(33, 150, 243, 0.4);
+    --bg:            #0a0e17;
+    --card-bg:       rgba(14, 22, 38, 0.85);
+    --glass-border:  rgba(255, 255, 255, 0.08);
+    --text:          #f0f4ff;
+    --text-dim:      #64748b;
+    --ai-bubble:     rgba(22, 33, 55, 0.9);
+    --user-bubble:   #1565c0;
+    --chip-bg:       rgba(255, 255, 255, 0.05);
+    --chip-hover:    rgba(33, 150, 243, 0.12);
+    --red:           #ef4444;
+    --green:         #22c55e;
+    --transition:    0.2s ease;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse at 15% 15%, rgba(33,150,243,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 85%, rgba(33,150,243,0.05) 0%, transparent 50%);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* ─── Main App Container ─── */
+#app-container {
+    width: 96%;
+    max-width: 980px;
+    height: 92vh;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 28px 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top shine */
+#app-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(33,150,243,0.4), transparent);
+}
+
+/* ─── Header ─── */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+    min-height: 56px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.police-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.35));
+    flex-shrink: 0;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text #app-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    white-space: nowrap;
+    background: linear-gradient(110deg, #e3f2fd 20%, #2196f3 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-text #app-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    font-weight: 500;
+    margin-top: 1px;
+    white-space: nowrap;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+#user-chip {
+    background: rgba(33, 150, 243, 0.08);
+    border: 1px solid rgba(33, 150, 243, 0.25);
+    padding: 7px 15px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    white-space: nowrap;
+}
+
+#user-chip i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.lang-wrapper {
+    position: relative;
+}
+
+.lang-wrapper select {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: 1px solid var(--glass-border);
+    padding: 8px 38px 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color var(--transition);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.lang-wrapper select:hover {
+    border-color: rgba(33, 150, 243, 0.4);
+}
+
+.header-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    color: #cbd5e1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-size: 0.9rem;
+}
+
+.icon-btn:hover {
+    background: rgba(255,255,255,0.09);
+    transform: scale(1.07);
+    color: #fff;
+}
+
+.logout-btn i {
+    color: var(--red);
+}
+
+/* ─── Chat Window ─── */
+#chat-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    mask-image: linear-gradient(to bottom, transparent, black 4%, black 96%, transparent);
+}
+
+#chat-window::-webkit-scrollbar { width: 5px; }
+#chat-window::-webkit-scrollbar-track { background: transparent; }
+#chat-window::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.18);
+    border-radius: 10px;
+}
+
+/* ─── Messages ─── */
+.message {
+    max-width: 78%;
+    padding: 14px 20px;
+    border-radius: 18px;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    animation: fadeUp 0.28s ease-out;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.ai-message {
+    align-self: flex-start;
+    background: var(--ai-bubble);
+    border: 1px solid var(--glass-border);
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: var(--user-bubble);
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 14px rgba(33, 150, 243, 0.25);
+}
+
+/* ─── Suggestion Chips ─── */
+#suggestion-container {
+    padding: 12px 0 8px;
+    flex-shrink: 0;
+    transition: opacity 0.3s;
+}
+
+#suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.suggestion-chip {
+    background: var(--chip-bg);
+    border: 1px solid var(--glass-border);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+
+.suggestion-chip:hover, .suggestion-chip.active {
+    background: var(--chip-hover);
+    border-color: rgba(33, 150, 243, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(33, 150, 243, 0.2);
+}
+
+.suggestion-chip i {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+/* ─── Input Area ─── */
+#input-area {
+    flex-shrink: 0;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 12px;
+}
+
+.controls-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Speak Tooltip */
+#speak-now-tooltip {
+    position: absolute;
+    top: -46px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+    display: none;
+    box-shadow: 0 4px 12px var(--primary-glow);
+    pointer-events: none;
+}
+
+#speak-now-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--primary);
+}
+
+/* Mic Button */
+.main-mic-btn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #42a5f5, #1565c0);
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 22px var(--primary-glow);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.main-mic-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 34px var(--primary-glow);
+}
+
+.main-mic-btn.listening {
+    animation: micPulse 1.4s ease-in-out infinite;
+}
+
+.main-mic-btn.ai-speaking {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    box-shadow: 0 0 22px rgba(139, 92, 246, 0.5);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+@keyframes micPulse {
+    0%   { transform: scale(1);    box-shadow: 0 0 22px var(--primary-glow); }
+    50%  { transform: scale(1.1);  box-shadow: 0 0 42px var(--primary-glow); }
+    100% { transform: scale(1);    box-shadow: 0 0 22px var(--primary-glow); }
+}
+
+/* Keyboard Toggle Button */
+.keyboard-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--glass-border);
+    color: #94a3b8;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--transition);
+}
+
+.keyboard-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    transform: scale(1.06);
+}
+
+/* Text Input Row */
+#text-input-row {
+    width: 100%;
+    max-width: 580px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    display: flex;
+    padding: 5px;
+    gap: 8px;
+}
+
+#user-text-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 11px 18px;
+    color: #fff;
+    font-size: 0.97rem;
+    font-family: inherit;
+    outline: none;
+}
+
+#user-text-input::placeholder {
+    color: var(--text-dim);
+}
+
+#send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--primary);
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#send-btn:hover {
+    transform: scale(1.06);
+    filter: brightness(1.15);
+}
+
+/* Status Indicator */
+.status-indicator {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: none;
+    padding: 4px 0;
+}
+
+.status-indicator.error {
+    color: #fca5a5;
+}
+
+/* ─── OVERLAY (Full-screen backdrop) ─── */
+#overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+}
+
+/* ─── FIR MODAL ─── */
+#fir-report-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 680px;
+    max-height: 85vh;
+    background: #0f172a;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    z-index: 200;
+    overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+    animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: translate(-50%, -46%) scale(0.95); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.fir-header {
+    background: linear-gradient(135deg, #1e3a5f, #1565c0);
+    padding: 22px 28px;
+    border-radius: 20px 20px 0 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.fir-header h2 { color: #fff; font-size: 1.2rem; }
+.fir-header p  { color: rgba(255,255,255,0.7); font-size: 0.8rem; margin-top: 4px; }
+
+.fir-body {
+    padding: 24px 28px;
+    color: #cbd5e1;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.fir-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 9px 0;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fir-label { font-weight: 600; color: #94a3b8; }
+
+.fir-point-row {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 9px 0;
+    gap: 3px;
+}
+
+.fir-point-title { font-weight: 600; color: #93c5fd; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.fir-point-value { color: #e2e8f0; }
+
+#modal-actions {
+    padding: 16px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-download {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.btn-download:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* ─── Diagnostics Toggle ─── */
+#diag-toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+}
+
+#diag-toggle-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(22, 33, 55, 0.9);
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+}
+
+#diag-toggle-btn:hover { color: #fff; border-color: rgba(33,150,243,0.4); }
+
+/* ─── Diagnostics Panel ─── */
+#diagnostic-panel {
+    display: none;
+    position: fixed;
+    bottom: 72px;
+    right: 20px;
+    width: 320px;
+    max-height: 360px;
+    background: rgba(10, 15, 30, 0.97);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    z-index: 60;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+    display: none;
+    flex-direction: column;
+}
+
+.diag-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.diag-header h3 {
+    font-size: 0.9rem;
+    color: #93c5fd;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.close-diag {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    transition: color var(--transition);
+}
+
+.close-diag:hover { color: #fff; }
+
+#diag-status {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    color: #64748b;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+#diag-log-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 16px;
+    max-height: 200px;
+}
+
+#diag-logs {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    line-height: 1.7;
+    font-family: monospace;
+}
+
+.diag-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.diag-btn {
+    flex: 1;
+    padding: 7px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(33,150,243,0.15);
+    color: #93c5fd;
+    font-size: 0.78rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.diag-btn:hover { background: rgba(33,150,243,0.28); }
+
+/* ─── Priority Badges ─── */
+.priority-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.priority-badge.high   { background: rgba(239, 68, 68, 0.2);  color: #fca5a5; }
+.priority-badge.medium { background: rgba(234,179, 8, 0.2);   color: #fde047; }
+.priority-badge.low    { background: rgba(34, 197, 94, 0.2);  color: #86efac; }
+
+/* Official FIR Doc style */
+.official-fir-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(33,150,243,0.3);
+}
+.official-fir-header .logo-img { width: 52px; height: 52px; object-fit: contain; }
+.official-fir-header h1 { font-size: 1rem; color: #e2e8f0; }
+.official-fir-header p  { font-size: 0.78rem; color: #64748b; margin-top: 2px; }
+
+/* ─── Responsive (mobile) ─── */
+@media (max-width: 600px) {
+    #app-container { padding: 16px 16px 14px; border-radius: 20px; }
+    header { flex-wrap: wrap; gap: 10px; }
+    .header-right { gap: 8px; }
+    #user-chip span { display: none; }
+    .logo-text #app-title { font-size: 1.4rem; }
+    .lang-wrapper select { font-size: 0.8rem; padding-left: 10px; }
+    #fir-report-modal { width: 96%; }
+    #diagnostic-panel { width: calc(100vw - 24px); right: 12px; bottom: 68px; }
+}
+
+/* ─── PDF Export Mode (Light Theme Override) ─── */
+.pdf-export-mode {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.pdf-export-mode * {
+    color: #000000 !important;
+    border-color: #dddddd !important;
+}
+
+.pdf-export-mode .fir-header {
+    background: transparent !important;
+    border-bottom: 2px solid #000000 !important;
+    padding: 10px 0 !important;
+}
+
+.pdf-export-mode .fir-header h2,
+.pdf-export-mode .fir-header p {
+    color: #000000 !important;
+}
+
+.pdf-export-mode .official-fir-header h1,
+.pdf-export-mode .official-fir-header p,
+.pdf-export-mode .fir-point-row span {
+    color: #000000 !important;
+}
+/* ─── Biometric Scanner Styles ─── */
+#scanner-container {
+    position: relative;
+    width: 80px;
+    height: 100px;
+    background: rgba(33, 150, 243, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#fingerprint-icon {
+    font-size: 3.5rem;
+    color: rgba(33, 150, 243, 0.3);
+    transition: all 0.5s ease;
+}
+
+#scanning-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+    display: none;
+    z-index: 2;
+}
+
+@keyframes scanLoop {
+    0% { top: 0; }
+    50% { top: 100%; }
+    100% { top: 0; }
+}
+
+.scanning #scanning-line {
+    display: block;
+    animation: scanLoop 1.5s linear infinite;
+}
+
+.scanning #fingerprint-icon {
+    color: var(--primary);
+    text-shadow: 0 0 20px var(--primary-glow);
+}
+
+.verified #scanner-container {
+    border-color: var(--green);
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.verified #fingerprint-icon {
+    color: var(--green);
+    text-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Biometric Thumbprint for PDF (Hidden in UI, used for canvas capture) */
+#pdf-thumbprint-template {
+    width: 80px;
+    height: 100px;
+    display: none;
+    text-align: center;
+    position: relative;
+}
+
+#pdf-thumbprint-template i {
+    font-size: 60px;
+    color: #1e3a8a; /* Navy blue stamp color */
+}
+
+.verified-stamp {
+    position: absolute;
+    bottom: 5px;
+    right: -10px;
+    background: #1e3a8a;
+    color: white;
+    font-size: 8px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: 800;
+    transform: rotate(-15deg);
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceFIR AI – Official FIR System</title>
+    <meta name="description" content="VoiceFIR AI – Police Mitra Assistant for filing FIRs via voice or text">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- html2pdf.js for rich PDF rendering (covers jsPDF and html2canvas internally) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module">
+        import { logout } from './auth.js';
+        const user = JSON.parse(localStorage.getItem('voicefir_user'));
+        if (!user && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('signup.html')) {
+            window.location.href = 'login.html';
+        }
+        window.logout = logout;
+    </script>
+</head>
+<body>
+
+    <!-- ── Main App Card ── -->
+    <div id="app-container">
+
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/ea/Appolice%28emblem%29.png"
+                     alt="AP Police Logo" class="police-logo">
+                <div class="logo-text">
+                    <h1 id="app-title">VoiceFIR AI</h1>
+                    <p id="app-subtitle">Police Mitra Assistant</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div id="user-chip">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="user-display-name">G Bhavitha</span>
+                </div>
+                <div class="lang-wrapper">
+                    <select id="lang-selector">
+                        <option value="en">English (US)</option>
+                        <option value="te">Telugu (తెలుగు)</option>
+                        <option value="hi">Hindi (हिंदी)</option>
+                    </select>
+                </div>
+                <div class="header-icons">
+                    <button id="restart-btn" class="icon-btn" title="Restart">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button onclick="logout()" class="icon-btn logout-btn" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Window -->
+        <div id="chat-window"></div>
+
+        <!-- Suggestion Chips -->
+        <div id="suggestion-container">
+            <div id="suggestion-chips"></div>
+        </div>
+
+        <!-- Input Area -->
+        <div id="input-area">
+            <!-- Voice / Keyboard controls -->
+            <div class="controls-wrapper">
+                <div id="speak-now-tooltip">Speak Now...</div>
+                <button id="mic-btn" class="main-mic-btn" title="Click to speak">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="mode-toggle-btn" class="keyboard-btn" title="Switch to text input">
+                    <i class="fas fa-keyboard"></i>
+                </button>
+            </div>
+
+            <!-- Text Input Row (hidden by default) -->
+            <div id="text-input-row" style="display:none;">
+                <input type="text" id="user-text-input"
+                       placeholder="Type your response here..." autocomplete="off">
+                <button id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-indicator" id="status-text"></div>
+
+    </div><!-- /#app-container -->
+
+
+    <!-- ── Overlay (behind modal) ── -->
+    <div id="overlay" style="display:none;"></div>
+
+    <!-- ── FIR Report Modal ── -->
+    <div id="fir-report-modal" style="display:none;">
+        <div class="fir-header">
+            <h2 id="fir-modal-title">FIRST INFORMATION REPORT (FIR)</h2>
+            <p id="fir-modal-subtitle">Police Mitra AI Assistant – Generated Report</p>
+        </div>
+        <div class="fir-body" id="fir-content"></div>
+        
+        <!-- --- Digital Thumb Verification Section --- -->
+        <div id="biometric-verification-section" style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <div id="scanner-container">
+                <i class="fas fa-fingerprint" id="fingerprint-icon"></i>
+                <div id="scanning-line"></div>
+            </div>
+            <p id="biometric-status" style="margin-top: 12px; font-weight: 600; color: rgba(255,255,255,0.6);">
+                Biometric Signature Required (BNSS Sec 173)
+            </p>
+            <button id="scan-fingerprint-btn" class="auth-btn" style="padding: 12px 25px; font-size: 0.9rem; margin-top: 10px; background: linear-gradient(135deg, #2196f3, #1565c0);">
+                <i class="fas fa-id-card" style="margin-right: 8px;"></i>Scan Digital Thumb
+            </button>
+        </div>
+
+        <div id="modal-actions">
+            <button class="btn-download" id="download-incident-pdf-btn"
+                    style="background:#1a7a45;">
+                <i class="fas fa-file-download" style="margin-right:8px;"></i>Download Incident Report
+            </button>
+            <button class="btn-download" id="download-official-pdf-btn"
+                    style="background:#1565c0;">
+                <i class="fas fa-file-alt" style="margin-right:8px;"></i>Download Official BNSS Report
+            </button>
+            <button class="btn-download" id="close-modal-btn"
+                    style="background:#7f1d1d;">
+                <i class="fas fa-times" style="margin-right:8px;"></i>Close
+            </button>
+        </div>
+    </div>
+
+    <!-- ── Diagnostics Toggle Button ── -->
+    <div id="diag-toggle-container">
+        <button id="diag-toggle-btn" title="Microphone Diagnostics">
+            <i class="fas fa-stethoscope"></i>
+        </button>
+    </div>
+
+    <!-- ── Diagnostics Panel ── -->
+    <div id="diagnostic-panel" style="display:none;">
+        <div class="diag-header">
+            <h3><i class="fas fa-microscope"></i> Mic Diagnostics</h3>
+            <button class="close-diag" id="close-diag-btn">&times;</button>
+        </div>
+        <div id="diag-status">Status: All systems check pending...</div>
+        <div id="diag-log-container">
+            <div id="diag-logs"></div>
+        </div>
+        <div class="diag-actions">
+            <button id="run-full-diag-btn" class="diag-btn">
+                <i class="fas fa-play"></i> Full Test
+            </button>
+            <button id="hard-reset-btn" class="diag-btn" style="background:rgba(230,126,34,0.2);color:#fb923c;">
+                <i class="fas fa-sync-alt"></i> Hard Reset
+            </button>
+            <button id="clear-logs-btn" class="diag-btn">
+                <i class="fas fa-eraser"></i> Clear
+            </button>
+        </div>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
